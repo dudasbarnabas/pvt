@@ -1,10 +1,19 @@
 import os
 import requests
+from pathlib import Path
 
 from dotenv import load_dotenv
 
 def env_check():
-    load_dotenv()
+
+    local = (Path(__file__).parent)
+
+    path_env = local / ".env"
+
+    if not path_env.exists():
+        raise FileNotFoundError(f".env file is missing")
+
+    load_dotenv(path_env)
 
     SCRIPT_URL = os.getenv("GOOGLE_SCRIPT_URL")
     API_KEY = os.getenv("GOOGLE_API_KEY")

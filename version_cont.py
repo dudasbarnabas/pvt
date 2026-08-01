@@ -6,7 +6,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
-CURRENT_VERSION = "1.0.0"
+CURRENT_VERSION = "1.0.1"
 GITHUB_OWNER = "dudasbarnabas"
 GITHUB_REPO = "pvt"
 
@@ -74,9 +74,7 @@ def check_for_updates() -> None:
     except HTTPError as error:
         if error.code == 404:
             message = (
-                "Nem található kiadott GitHub Release.\n\n"
-                "Ellenőrizd a felhasználónevet és a repository nevét, "
-                "valamint azt, hogy létrehoztál-e valódi, publikált Release-t."
+                "Nem található kiadott GitHub Release."
             )
         else:
             message = f"GitHub HTTP-hiba: {error.code}"

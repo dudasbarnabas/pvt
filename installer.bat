@@ -1,0 +1,1 @@
+python -m PyInstaller --onedir --console --collect-all psychopy --name Launcher launcher.py

@@ -25,6 +25,8 @@ def main():
 
     FULLSCREEN = False
 
+    ISI_MIN = 5
+    ISI_MAX = 10
 
     # =========================
     # Participant dialog
@@ -34,10 +36,14 @@ def main():
         "participant": "sub-001",
         "session": "001",
         "FULLSCREEN": False,
-        "TASK_DURATION": 60
+        "TASK_DURATION": 60,
+        "ISI_MIN": 5,
+        "ISI_MAX": 10,
+        "ISI_BOTTOM": 3,
+        "ISI_TOP": 3
     }
 
-    dlg = gui.DlgFromDict(exp_info, title="PVT MWE")
+    dlg = gui.DlgFromDict(exp_info, title="PVT start", order=["FULLSCREEN","participant", "session", "TASK_DURATION", "ISI_MIN", "ISI_MAX", "ISI_BOTTOM", "ISI_TOP"])
     if not dlg.OK:
         core.quit()
 
@@ -143,19 +149,35 @@ def main():
 
     def comp_foreperiod(foreperiod=None):
         if foreperiod is None:
-            MIN_FOREPERIOD = 5
-            MAX_FOREPERIOD = 10
+            MIN_FOREPERIOD = ISI_MIN
+            MAX_FOREPERIOD = ISI_MAX
 
         else:
-            MIN_FOREPERIOD = foreperiod - 3
-            MAX_FOREPERIOD = foreperiod + 3
-            if MIN_FOREPERIOD < 5:
-                MIN_FOREPERIOD = 5
-            if MAX_FOREPERIOD > 10:
-                MAX_FOREPERIOD = 10
+            MIN_FOREPERIOD = foreperiod - ISI_BOTTOM
+            MAX_FOREPERIOD = foreperiod + ISI_TOP
+            if MIN_FOREPERIOD < ISI_MIN:
+                MIN_FOREPERIOD = ISI_MIN
+            if MAX_FOREPERIOD > ISI_MAX:
+                MAX_FOREPERIOD = ISI_MAX
 
         foreperiod = random.uniform(MIN_FOREPERIOD, MAX_FOREPERIOD)
         return foreperiod
+
+    # def comp_foreperiod(foreperiod=None):
+    #     if foreperiod is None:
+    #         MIN_FOREPERIOD = 5
+    #         MAX_FOREPERIOD = 10
+
+    #     else:
+    #         MIN_FOREPERIOD = foreperiod - 3
+    #         MAX_FOREPERIOD = foreperiod + 3
+    #         if MIN_FOREPERIOD < 5:
+    #             MIN_FOREPERIOD = 5
+    #         if MAX_FOREPERIOD > 10:
+    #             MAX_FOREPERIOD = 10
+
+    #     foreperiod = random.uniform(MIN_FOREPERIOD, MAX_FOREPERIOD)
+    #     return foreperiod
 
     # =========================
     # Instructions

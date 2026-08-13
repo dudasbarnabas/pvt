@@ -27,6 +27,7 @@ def main():
 
     ISI_MIN = 5
     ISI_MAX = 10
+    ISI_DIST = 3
 
     # =========================
     # Participant dialog
@@ -39,14 +40,16 @@ def main():
         "TASK_DURATION": 60,
         "ISI_MIN": 5,
         "ISI_MAX": 10,
-        "ISI_BOTTOM": 3,
-        "ISI_TOP": 3
+        "ISI_DIST": 3,
     }
 
-    dlg = gui.DlgFromDict(exp_info, title="PVT start", order=["FULLSCREEN","participant", "session", "TASK_DURATION", "ISI_MIN", "ISI_MAX", "ISI_BOTTOM", "ISI_TOP"])
+    dlg = gui.DlgFromDict(exp_info, title="PVT start", order=["FULLSCREEN","participant", "session", "TASK_DURATION", "ISI_MIN", "ISI_MAX", "ISI_DIST"])
     if not dlg.OK:
         core.quit()
 
+    ISI_MIN = exp_info['ISI_MIN']
+    ISI_MAX = exp_info['ISI_MAX']
+    ISI_DIST = exp_info['ISI_DIST']
 
     # =========================
     # Prepare output
@@ -153,8 +156,8 @@ def main():
             MAX_FOREPERIOD = ISI_MAX
 
         else:
-            MIN_FOREPERIOD = foreperiod - ISI_BOTTOM
-            MAX_FOREPERIOD = foreperiod + ISI_TOP
+            MIN_FOREPERIOD = foreperiod - ISI_DIST
+            MAX_FOREPERIOD = foreperiod + ISI_DIST
             if MIN_FOREPERIOD < ISI_MIN:
                 MIN_FOREPERIOD = ISI_MIN
             if MAX_FOREPERIOD > ISI_MAX:
@@ -254,6 +257,7 @@ def main():
             results.append({
                 "participant": exp_info["participant"],
                 "session": exp_info["session"],
+                "setup":f"{ISI_MIN}-{ISI_MAX},{ISI_DIST}",
                 "trial": trial,
                 "foreperiod_s": round(foreperiod, 6),
                 "outcome": "false_start",
@@ -322,6 +326,7 @@ def main():
         results.append({
             "participant": exp_info["participant"],
             "session": exp_info["session"],
+            "setup":f"{ISI_MIN}-{ISI_MAX},{ISI_DIST}",
             "trial": trial,
             "foreperiod_s": round(foreperiod, 6),
             "outcome": outcome,

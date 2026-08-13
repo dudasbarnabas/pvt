@@ -25,7 +25,7 @@ def env_check():
     
     return(SCRIPT_URL, API_KEY)
     
-def main(results=[{"id":"empty"},{"id":"empty"}]):
+def main(results=[{"participant":"empty"},{"participant":"empty"}]):
     SCRIPT_URL, API_KEY = env_check()
     payload = {
         "api_key": API_KEY,

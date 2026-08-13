@@ -42,8 +42,14 @@ def main():
         "ISI_MAX": 10,
         "ISI_DIST": 3,
     }
+    tips = {
+        "TASK_DURATION": "A feladat teljes időtartama másodpercben.",
+        "ISI_MIN": "Az ingerek közötti minimális idő másodpercben.",
+        "ISI_MAX": "Az ingerek közötti maximális idő másodpercben.",
+        "ISI_DIST": "Az ISI legnagyobb eltérése."
+    }
 
-    dlg = gui.DlgFromDict(exp_info, title="PVT start", order=["FULLSCREEN","participant", "session", "TASK_DURATION", "ISI_MIN", "ISI_MAX", "ISI_DIST"])
+    dlg = gui.DlgFromDict(exp_info, title="PVT start", order=["FULLSCREEN","participant", "session", "TASK_DURATION", "ISI_MIN", "ISI_MAX", "ISI_DIST"], tip=tips)
     if not dlg.OK:
         core.quit()
 

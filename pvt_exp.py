@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 
 from send_data import main as send_rows
+from data_frame_edits import main as df_edit
 
 def main():
     # =========================
@@ -354,6 +355,8 @@ def main():
         writer.writerows(results)
 
     send_rows(results)
+
+    df_edit(filename)
 
     # =========================
     # End screen
